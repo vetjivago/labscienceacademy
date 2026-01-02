@@ -1,16 +1,36 @@
-# React + Vite
+# Lab Science Academy (LSA)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bem-vindo ao repositório oficial da **Lab Science Academy**.
 
-Currently, two official plugins are available:
+## 🧬 Sobre o Projeto
+A Lab Science Academy é uma instituição técnico-científica focada na formação de alto nível para profissionais que atuam com animais de laboratório. Este projeto é a plataforma institucional e landing page para os cursos.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Tecnologias:**
+- React + Vite
+- CSS Modules / Vanilla CSS (Design System Próprio)
+- GitHub Actions (CI/CD para HostGator)
 
-## React Compiler
+## 🚀 Como Rodar Localmente
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Clone o repositório:
+```bash
+git clone https://github.com/vetjivago/labscienceacademy.git
+```
 
-## Expanding the ESLint configuration
+2. Instale as dependências:
+```bash
+npm install
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+3. Rode o servidor de desenvolvimento:
+```bash
+npm run dev
+```
+
+## 📦 Deploy (Automático)
+O deploy é realizado automaticamente via **GitHub Actions** para a hospedagem HostGator sempre que um push é feito na branch `main`.
+
+**Configuração do Workflow:** `.github/workflows/deploy.yml`
+
+---
+*Lab Science Academy © 2026 - Ética, Rigor e Tecnologia.*
