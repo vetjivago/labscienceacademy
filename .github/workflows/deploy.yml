@@ -35,6 +35,8 @@ jobs:
           server-dir: ./
           local-dir: ./dist/
           protocol: ftp
+          security: strict
+          timeout: 300000
           exclude: |
             **/.git*
             **/.git*/**
