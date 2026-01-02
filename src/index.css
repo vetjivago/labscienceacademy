@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Brand Colors - Primary */
+  --navy-institucional: #002B5C;
+  /* Títulos, elementos principais */
+  --azul-escuro: #003366;
+  /* Textos, alternativa ao Navy */
+  --azul-claro: #87CEEB;
+  /* Destaques, "Academy" */
+
+  /* Brand Colors - Secondary */
+  --verde-agua: #66CC99;
+  /* Acentos, CTAs, sucesso */
+  --cinza-claro: #F2F2F2;
+  /* Fundos, separadores */
+  --cinza-medio: #666666;
+  /* Textos secundários */
+  --branco: #FFFFFF;
+  --preto: #000000;
+
+  /* Typography */
+  --font-primary: 'Arial', sans-serif;
+  --font-web: 'Inter', sans-serif;
+  /* Preferred for web interface per Brand Book */
+
+  font-family: var(--font-web);
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--branco);
+  color: var(--cinza-medio);
+  /* Default text color per brand book guidelines implies clean look */
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-web);
+  color: var(--navy-institucional);
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: 0.3s;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* Utilities */
+.text-navy {
+  color: var(--navy-institucional);
+}
+
+.text-azul-claro {
+  color: var(--azul-claro);
+}
+
+.text-verde {
+  color: var(--verde-agua);
+}
