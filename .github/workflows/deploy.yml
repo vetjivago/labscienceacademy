@@ -34,7 +34,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: labscienceacademy.com/
           local-dir: ./dist/
-          protocol: ftps
+          protocol: ftp
           exclude: |
             **/.git*
             **/.git*/**
