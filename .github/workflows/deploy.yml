@@ -32,10 +32,10 @@ jobs:
           server: 108.179.193.183
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /home2/josel054/public_html/
+          server-dir: ../public_html/
           local-dir: ./dist/
           protocol: ftp
-          security: false
+          security: loose
           timeout: 300000
           exclude: |
             **/.git*
