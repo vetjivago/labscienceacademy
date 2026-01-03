@@ -32,7 +32,7 @@ jobs:
           server: 108.179.193.183
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /public_html/
+          server-dir: ./
           local-dir: ./dist/
           protocol: ftp
           security: strict
