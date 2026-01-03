@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lab Science Academy - Formação prática e ética em ciência de animais de laboratório. Cursos que integram conformidade regulatória, bem-estar animal e tecnologia.">
+    <title>Lab Science Academy | Ciência com Ética, Clareza e Tecnologia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #002B5C;
+            --azul-escuro: #003366;
+            --azul-claro: #87CEEB;
+            --verde-agua: #66CC99;
+            --verde-hover: #52b886;
+            --cinza-claro: #F2F2F2;
+            --cinza-medio: #666666;
+            --branco: #FFFFFF;
+            --preto: #000000;
+            --font-body: 'Inter', Arial, sans-serif;
+            --font-display: 'DM Sans', Arial, sans-serif;
+            --shadow-sm: 0 2px 8px rgba(0,43,92,0.08);
+            --shadow-md: 0 4px 20px rgba(0,43,92,0.12);
+            --shadow-lg: 0 8px 40px rgba(0,43,92,0.16);
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-full: 50px;
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); color: var(--preto); background: var(--branco); line-height: 1.6; overflow-x: hidden; }
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; transition: 0.3s ease; }
+        ul, ol { list-style: none; }
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 700; line-height: 1.2; color: var(--navy); }
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(2rem, 4vw, 3rem); }
+        h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+        p { color: var(--cinza-medio); line-height: 1.7; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        .section { padding: 5rem 0; }
+        .section-title { text-align: center; margin-bottom: 3rem; }
+        .section-title span { display: block; font-size: 0.875rem; font-weight: 600; color: var(--verde-agua); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; }
+        .section-title p { max-width: 600px; margin: 1rem auto 0; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem 2rem; font-family: var(--font-body); font-size: 1rem; font-weight: 600; border: none; border-radius: var(--radius-full); cursor: pointer; transition: 0.3s ease; }
+        .btn-primary { background: var(--verde-agua); color: var(--branco); box-shadow: 0 4px 15px rgba(102,204,153,0.4); }
+        .btn-primary:hover { background: var(--verde-hover); transform: translateY(-2px); box-shadow: 0 6px 25px rgba(102,204,153,0.5); }
+        .btn-secondary { background: transparent; color: var(--navy); border: 2px solid var(--navy); }
+        .btn-secondary:hover { background: var(--navy); color: var(--branco); }
+        .btn-outline-light { background: transparent; color: var(--branco); border: 2px solid var(--branco); }
+        .btn-outline-light:hover { background: var(--branco); color: var(--navy); }
+
+        /* Header */
+        .header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,43,92,0.08); transition: 0.3s ease; }
+        .header.scrolled { box-shadow: var(--shadow-sm); }
+        .nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; }
+        .nav-logo { display: flex; align-items: center; gap: 0.5rem; }
+        .nav-logo svg { height: 45px; width: auto; }
+        .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+        .nav-logo-text strong { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--navy); }
+        .nav-logo-text span { font-size: 1rem; font-weight: 500; color: var(--azul-claro); }
+        .nav-menu { display: flex; align-items: center; gap: 2rem; }
+        .nav-link { font-size: 0.9375rem; font-weight: 500; color: var(--azul-escuro); position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--verde-agua); transition: 0.2s ease; }
+        .nav-link:hover::after { width: 100%; }
+        .nav-cta { margin-left: 1rem; }
+        .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+        .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--navy); transition: 0.2s ease; }
+
+        /* Hero */
+        .hero { position: relative; min-height: 100vh; display: flex; align-items: center; background: linear-gradient(135deg, var(--navy) 0%, var(--azul-escuro) 100%); overflow: hidden; padding-top: 80px; }
+        .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 20% 80%, rgba(135,206,235,0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(102,204,153,0.1) 0%, transparent 50%); pointer-events: none; }
+        .hero-content { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+        .hero-text { color: var(--branco); }
+        .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(102,204,153,0.2); border: 1px solid rgba(102,204,153,0.4); border-radius: var(--radius-full); font-size: 0.875rem; font-weight: 500; color: var(--verde-agua); margin-bottom: 1.5rem; }
+        .hero-badge svg { width: 16px; height: 16px; }
+        .hero-title { color: var(--branco); margin-bottom: 1.5rem; }
+        .hero-title .highlight { color: var(--azul-claro); }
+        .hero-description { font-size: 1.125rem; color: rgba(255,255,255,0.85); margin-bottom: 2rem; max-width: 500px; }
+        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .hero-stats { display: flex; gap: 3rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.15); }
+        .hero-stat-number { display: block; font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: var(--verde-agua); line-height: 1; }
+        .hero-stat-label { font-size: 0.875rem; color: rgba(255,255,255,0.7); margin-top: 0.25rem; }
+        .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
+        .hero-image-wrapper { position: relative; width: 100%; max-width: 500px; }
+        .hero-image { position: relative; background: linear-gradient(135deg, rgba(135,206,235,0.2) 0%, rgba(102,204,153,0.2) 100%); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-lg); }
+        .hero-card { background: var(--branco); border-radius: var(--radius-md); padding: 2rem; box-shadow: var(--shadow-md); }
+        .hero-card-icon { width: 60px; height: 60px; background: linear-gradient(135deg, var(--navy) 0%, var(--azul-escuro) 100%); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+        .hero-card-icon svg { width: 32px; height: 32px; color: var(--branco); }
+        .hero-card h4 { color: var(--navy); margin-bottom: 0.5rem; font-size: 1.25rem; }
+        .hero-card p { font-size: 0.9375rem; margin-bottom: 1.5rem; }
+        .hero-card-features { display: flex; flex-direction: column; gap: 0.5rem; }
+        .hero-card-feature { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--cinza-medio); }
+        .hero-card-feature svg { width: 16px; height: 16px; color: var(--verde-agua); flex-shrink: 0; }
+        .floating-element { position: absolute; background: var(--branco); border-radius: var(--radius-md); padding: 0.75rem 1rem; box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 0.5rem; animation: float 3s ease-in-out infinite; }
+        .floating-element-1 { top: 10%; right: -20px; }
+        .floating-element-2 { bottom: 20%; left: -30px; animation-delay: 1s; }
+        .floating-element svg { width: 20px; height: 20px; color: var(--verde-agua); }
+        .floating-element span { font-size: 0.8125rem; font-weight: 600; color: var(--navy); }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        /* About */
+        .about { background: var(--cinza-claro); }
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+        .about-image { position: relative; }
+        .about-image-main { background: linear-gradient(135deg, var(--navy) 0%, var(--azul-escuro) 100%); border-radius: var(--radius-lg); padding: 3rem; color: var(--branco); text-align: center; }
+        .about-image-main svg { width: 120px; height: 120px; margin-bottom: 1.5rem; opacity: 0.9; }
+        .about-image-main h3 { color: var(--branco); font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .about-image-main p { color: rgba(255,255,255,0.8); font-size: 0.9375rem; }
+        .about-badge { position: absolute; bottom: -20px; right: -20px; background: var(--verde-agua); color: var(--branco); padding: 1.5rem; border-radius: var(--radius-md); text-align: center; box-shadow: var(--shadow-md); }
+        .about-badge strong { display: block; font-size: 2rem; font-weight: 700; }
+        .about-badge span { font-size: 0.8125rem; }
+        .about-text h2 { margin-bottom: 1.5rem; }
+        .about-text > p { margin-bottom: 1.5rem; }
+        .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+        .about-feature { display: flex; align-items: flex-start; gap: 1rem; }
+        .about-feature-icon { width: 48px; height: 48px; background: rgba(0,43,92,0.08); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .about-feature-icon svg { width: 24px; height: 24px; color: var(--navy); }
+        .about-feature h4 { font-size: 1rem; margin-bottom: 0.25rem; }
+        .about-feature p { font-size: 0.875rem; }
+
+        /* Courses */
+        .courses { background: var(--branco); }
+        .courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+        .course-card { background: var(--branco); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: 0.3s ease; border: 1px solid rgba(0,43,92,0.08); }
+        .course-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+        .course-card-header { background: linear-gradient(135deg, var(--navy) 0%, var(--azul-escuro) 100%); padding: 2rem; position: relative; overflow: hidden; }
+        .course-card-header::before { content: ''; position: absolute; top: -50%; right: -50%; width: 100%; height: 100%; background: radial-gradient(circle, rgba(135,206,235,0.2) 0%, transparent 70%); }
+        .course-badge { position: relative; display: inline-block; padding: 0.25rem 0.75rem; background: var(--verde-agua); color: var(--branco); font-size: 0.75rem; font-weight: 600; border-radius: var(--radius-full); margin-bottom: 1rem; }
+        .course-badge.premium { background: var(--azul-claro); color: var(--navy); }
+        .course-card-header h3 { color: var(--branco); font-size: 1.25rem; margin-bottom: 0.5rem; position: relative; }
+        .course-card-header p { color: rgba(255,255,255,0.8); font-size: 0.9375rem; position: relative; }
+        .course-card-body { padding: 2rem; }
+        .course-meta { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(0,43,92,0.08); }
+        .course-meta-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--cinza-medio); }
+        .course-meta-item svg { width: 16px; height: 16px; color: var(--verde-agua); }
+        .course-topics { margin-bottom: 1.5rem; }
+        .course-topics h4 { font-size: 0.875rem; color: var(--navy); margin-bottom: 1rem; }
+        .course-topics ul { display: flex; flex-direction: column; gap: 0.5rem; }
+        .course-topics li { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--cinza-medio); }
+        .course-topics li svg { width: 14px; height: 14px; color: var(--verde-agua); flex-shrink: 0; }
+        .course-card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 1.5rem; border-top: 1px solid rgba(0,43,92,0.08); }
+        .course-price .current { font-size: 1.5rem; font-weight: 700; color: var(--navy); }
+        .course-price .period { font-size: 0.875rem; color: var(--cinza-medio); }
+
+        /* Benefits */
+        .benefits { background: linear-gradient(135deg, var(--navy) 0%, var(--azul-escuro) 100%); color: var(--branco); position: relative; overflow: hidden; }
+        .benefits::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 10% 90%, rgba(102,204,153,0.15) 0%, transparent 40%), radial-gradient(circle at 90% 10%, rgba(135,206,235,0.1) 0%, transparent 40%); }
+        .benefits .section-title h2 { color: var(--branco); }
+        .benefits .section-title p { color: rgba(255,255,255,0.8); }
+        .benefits-grid { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .benefit-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-lg); padding: 2rem; text-align: center; transition: 0.3s ease; }
+        .benefit-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-5px); }
+        .benefit-icon { width: 72px; height: 72px; background: linear-gradient(135deg, var(--verde-agua) 0%, #52b886 100%); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
+        .benefit-icon svg { width: 36px; height: 36px; color: var(--branco); }
+        .benefit-card h3 { color: var(--branco); font-size: 1.25rem; margin-bottom: 1rem; }
+        .benefit-card p { color: rgba(255,255,255,0.7); font-size: 0.9375rem; }
+
+        /* Audience */
+        .audience { background: var(--cinza-claro); }
+        .audience-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+        .audience-card { background: var(--branco); border-radius: var(--radius-md); padding: 2rem; text-align: center; transition: 0.3s ease; border: 2px solid transparent; }
+        .audience-card:hover { border-color: var(--verde-agua); transform: translateY(-5px); }
+        .audience-icon { width: 64px; height: 64px; background: rgba(0,43,92,0.08); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+        .audience-icon svg { width: 32px; height: 32px; color: var(--navy); }
+        .audience-card h4 { font-size: 1rem; margin-bottom: 0.5rem; }
+        .audience-card p { font-size: 0.8125rem; }
+
+        /* Pricing */
+        .pricing { background: var(--branco); }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1000px; margin: 0 auto; }
+        .pricing-card { background: var(--branco); border-radius: var(--radius-lg); padding: 2rem; text-align: center; border: 2px solid rgba(0,43,92,0.1); transition: 0.3s ease; position: relative; }
+        .pricing-card.featured { border-color: var(--verde-agua); transform: scale(1.05); box-shadow: var(--shadow-lg); }
+        .pricing-card.featured::before { content: 'Mais Popular'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--verde-agua); color: var(--branco); padding: 0.25rem 1rem; font-size: 0.75rem; font-weight: 600; border-radius: var(--radius-full); }
+        .pricing-card:hover { border-color: var(--verde-agua); }
+        .pricing-card h3 { font-size: 1.25rem; margin-bottom: 1rem; }
+        .pricing-amount { margin-bottom: 1.5rem; }
+        .pricing-amount .currency { font-size: 1.25rem; font-weight: 600; color: var(--navy); vertical-align: top; }
+        .pricing-amount .value { font-family: var(--font-display); font-size: 3.5rem; font-weight: 700; color: var(--navy); line-height: 1; }
+        .pricing-amount .period { display: block; font-size: 0.875rem; color: var(--cinza-medio); margin-top: 0.5rem; }
+        .pricing-features { text-align: left; margin-bottom: 2rem; }
+        .pricing-features li { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0; font-size: 0.9375rem; color: var(--cinza-medio); }
+        .pricing-features li svg { width: 18px; height: 18px; color: var(--verde-agua); flex-shrink: 0; }
+        .pricing-card .btn { width: 100%; }
+
+        /* CTA */
+        .cta { background: linear-gradient(135deg, var(--navy) 0%, var(--azul-escuro) 100%); text-align: center; position: relative; overflow: hidden; }
+        .cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 0%, rgba(135,206,235,0.2) 0%, transparent 50%); }
+        .cta-content { position: relative; max-width: 700px; margin: 0 auto; }
+        .cta h2 { color: var(--branco); margin-bottom: 1.5rem; }
+        .cta p { color: rgba(255,255,255,0.85); font-size: 1.125rem; margin-bottom: 2rem; }
+        .cta-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+        .hotmart-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(255,255,255,0.1); border-radius: var(--radius-full); font-size: 0.8125rem; color: rgba(255,255,255,0.8); margin-top: 1.5rem; }
+        .hotmart-badge svg { width: 16px; height: 16px; }
+
+        /* FAQ */
+        .faq { background: var(--cinza-claro); }
+        .faq-grid { max-width: 800px; margin: 0 auto; }
+        .faq-item { background: var(--branco); border-radius: var(--radius-md); margin-bottom: 1rem; overflow: hidden; border: 1px solid rgba(0,43,92,0.08); }
+        .faq-question { width: 100%; padding: 1.5rem 2rem; background: none; border: none; text-align: left; font-family: var(--font-body); font-size: 1rem; font-weight: 600; color: var(--navy); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; transition: 0.2s ease; }
+        .faq-question:hover { background: rgba(0,43,92,0.03); }
+        .faq-question svg { width: 20px; height: 20px; color: var(--verde-agua); transition: 0.2s ease; flex-shrink: 0; }
+        .faq-item.active .faq-question svg { transform: rotate(180deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .faq-answer-inner { padding: 0 2rem 1.5rem; }
+        .faq-answer p { font-size: 0.9375rem; }
+        .faq-item.active .faq-answer { max-height: 500px; }
+
+        /* Footer */
+        .footer { background: var(--navy); color: var(--branco); padding: 3rem 0 2rem; }
+        .footer-content { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .footer-brand { max-width: 300px; }
+        .footer-logo { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .footer-logo svg { height: 40px; width: auto; }
+        .footer-brand p { color: rgba(255,255,255,0.7); font-size: 0.9375rem; margin-bottom: 1.5rem; }
+        .footer-social { display: flex; gap: 1rem; }
+        .footer-social a { width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; transition: 0.2s ease; }
+        .footer-social a:hover { background: var(--verde-agua); }
+        .footer-social svg { width: 20px; height: 20px; color: var(--branco); }
+        .footer-column h4 { color: var(--branco); font-size: 1rem; margin-bottom: 1.5rem; }
+        .footer-column ul { display: flex; flex-direction: column; gap: 0.5rem; }
+        .footer-column a { color: rgba(255,255,255,0.7); font-size: 0.9375rem; transition: 0.2s ease; }
+        .footer-column a:hover { color: var(--verde-agua); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; flex-wrap: wrap; gap: 1rem; }
+        .footer-bottom p { color: rgba(255,255,255,0.6); font-size: 0.875rem; }
+        .footer-bottom-links { display: flex; gap: 1.5rem; }
+        .footer-bottom-links a { color: rgba(255,255,255,0.6); font-size: 0.875rem; }
+        .footer-bottom-links a:hover { color: var(--verde-agua); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-description { margin: 0 auto 2rem; }
+            .hero-buttons { justify-content: center; }
+            .hero-stats { justify-content: center; }
+            .hero-visual { display: none; }
+            .about-content { grid-template-columns: 1fr; }
+            .about-image { max-width: 400px; margin: 0 auto; }
+            .benefits-grid { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .pricing-card.featured { transform: none; }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-menu { position: fixed; top: 70px; left: 0; right: 0; background: var(--branco); flex-direction: column; padding: 2rem; gap: 1.5rem; box-shadow: var(--shadow-md); transform: translateY(-150%); transition: 0.3s ease; opacity: 0; visibility: hidden; }
+            .nav-menu.active { transform: translateY(0); opacity: 1; visibility: visible; }
+            .nav-toggle { display: flex; }
+            .nav-cta { margin-left: 0; }
+            .hero-stats { flex-direction: column; gap: 1.5rem; text-align: center; }
+            .about-features { grid-template-columns: 1fr; }
+            .courses-grid { grid-template-columns: 1fr; }
+            .audience-grid { grid-template-columns: 1fr 1fr; }
+            .footer-content { grid-template-columns: 1fr; text-align: center; }
+            .footer-brand { max-width: none; }
+            .footer-logo { justify-content: center; }
+            .footer-social { justify-content: center; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+        @media (max-width: 480px) {
+            .hero-buttons { flex-direction: column; width: 100%; }
+            .hero-buttons .btn { width: 100%; }
+            .audience-grid { grid-template-columns: 1fr; }
+            .cta-buttons { flex-direction: column; }
+            .cta-buttons .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="nav-logo">
+                    <svg viewBox="0 0 50 50" fill="none"><circle cx="25" cy="20" r="8" fill="#002B5C"/><rect x="22" y="10" width="6" height="8" fill="#002B5C"/><path d="M15 35 L25 45 L35 35" stroke="#002B5C" stroke-width="3" fill="none"/><path d="M18 30 Q25 38 32 30" stroke="#87CEEB" stroke-width="2" fill="none"/><ellipse cx="40" cy="42" rx="6" ry="4" fill="#87CEEB"/><circle cx="42" cy="40" r="1" fill="#002B5C"/></svg>
+                    <div class="nav-logo-text"><strong>Lab Science</strong><span>Academy</span></div>
+                </a>
+                <div class="nav-menu" id="navMenu">
+                    <a href="#sobre" class="nav-link">Sobre</a>
+                    <a href="#cursos" class="nav-link">Cursos</a>
+                    <a href="#beneficios" class="nav-link">Benefícios</a>
+                    <a href="#planos" class="nav-link">Planos</a>
+                    <a href="#faq" class="nav-link">FAQ</a>
+                    <a href="#" class="btn btn-primary nav-cta">Começar Agora</a>
+                </div>
+                <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        Plataforma de Formação Científica
+                    </div>
+                    <h1 class="hero-title">Capacitação em <span class="highlight">Ciência Animal</span> com Ética, Clareza e Tecnologia</h1>
+                    <p class="hero-description">Formação prática e comparativa em ciência de animais de laboratório que integra ética, conformidade regulatória e tecnologia para aplicação imediata no mundo real.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary">Comece Grátis com LSA-00 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                        <a href="#cursos" class="btn btn-outline-light">Ver Todos os Cursos</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="hero-stat"><span class="hero-stat-number">4+</span><span class="hero-stat-label">Módulos Especializados</span></div>
+                        <div class="hero-stat"><span class="hero-stat-number">3Rs</span><span class="hero-stat-label">Replace, Reduce, Refine</span></div>
+                        <div class="hero-stat"><span class="hero-stat-number">100%</span><span class="hero-stat-label">Aplicação Prática</span></div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-image-wrapper">
+                        <div class="hero-image">
+                            <div class="hero-card">
+                                <div class="hero-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                                <h4>Curso Introdutório Gratuito</h4>
+                                <p>LSA-00: IA em Pesquisa Científica — sua porta de entrada para a ciência moderna.</p>
+                                <div class="hero-card-features">
+                                    <div class="hero-card-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Certificado incluso</span></div>
+                                    <div class="hero-card-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Acesso imediato</span></div>
+                                    <div class="hero-card-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Conteúdo atualizado</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="floating-element floating-element-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg><span>CONCEA</span></div>
+                        <div class="floating-element floating-element-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Ética Aplicada</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about section" id="sobre">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="about-image-main">
+                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2"><circle cx="50" cy="30" r="15"/><rect x="45" y="15" width="10" height="12"/><path d="M30 65 L50 85 L70 65"/><path d="M35 55 Q50 70 65 55"/><ellipse cx="80" cy="75" rx="12" ry="8"/></svg>
+                        <h3>Lab Science Academy</h3>
+                        <p>Transformando diretrizes em execução prática</p>
+                    </div>
+                    <div class="about-badge"><strong>LSA</strong><span>Desde 2026</span></div>
+                </div>
+                <div class="about-text">
+                    <div class="section-title" style="text-align: left; margin-bottom: 1.5rem;"><span>Sobre a Academia</span></div>
+                    <h2>Elevando o Padrão da Ciência com Animais de Laboratório</h2>
+                    <p>A Lab Science Academy existe para elevar o padrão da ciência com animais de laboratório por meio de formação aplicada, ética e tecnologicamente orientada.</p>
+                    <p>Atuamos na interseção entre ciência rigorosa, bem-estar animal, conformidade regulatória e inovação tecnológica — especialmente IA. Nossa missão é transformar diretrizes abstratas em execução prática.</p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="about-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                            <div><h4>Ética Aplicada</h4><p>Ética como prática operacional</p></div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                            <div><h4>Rigor com Clareza</h4><p>Ciência sólida e objetiva</p></div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+                            <div><h4>Conformidade Funcional</h4><p>Normas em execução prática</p></div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+                            <div><h4>Tecnologia com Propósito</h4><p>IA a serviço da qualidade</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses -->
+    <section class="courses section" id="cursos">
+        <div class="container">
+            <div class="section-title">
+                <span>Nossos Cursos</span>
+                <h2>Trilha de Formação Especializada</h2>
+                <p>Cursos modulares e progressivos para sua capacitação completa em ciência de animais de laboratório.</p>
+            </div>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-card-header">
+                        <span class="course-badge">Gratuito</span>
+                        <h3>LSA-00: IA em Pesquisa Científica</h3>
+                        <p>Sua porta de entrada para a ciência moderna</p>
+                    </div>
+                    <div class="course-card-body">
+                        <div class="course-meta">
+                            <div class="course-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>3-4 horas</span></div>
+                            <div class="course-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span>4 módulos</span></div>
+                        </div>
+                        <div class="course-topics">
+                            <h4>O que você vai aprender:</h4>
+                            <ul>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>História e evolução da IA</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Aplicações em análise de dados</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>IA e os 3Rs</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Desafios éticos</li>
+                            </ul>
+                        </div>
+                        <div class="course-card-footer">
+                            <div class="course-price"><span class="current">Grátis</span></div>
+                            <a href="#" class="btn btn-primary">Acessar Agora</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-card-header">
+                        <span class="course-badge premium">Premium</span>
+                        <h3>LSA-01: Fundamentos e Ética</h3>
+                        <p>Base sólida em pesquisa animal</p>
+                    </div>
+                    <div class="course-card-body">
+                        <div class="course-meta">
+                            <div class="course-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>6+ horas</span></div>
+                            <div class="course-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span>6 aulas</span></div>
+                        </div>
+                        <div class="course-topics">
+                            <h4>O que você vai aprender:</h4>
+                            <ul>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>História da experimentação animal</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Princípios dos 3Rs na prática</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Ética e responsabilidade</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Protocolos CEUA</li>
+                            </ul>
+                        </div>
+                        <div class="course-card-footer">
+                            <div class="course-price"><span class="current">R$ 49,90</span><span class="period">/mês</span></div>
+                            <a href="#" class="btn btn-secondary">Saiba Mais</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-card-header">
+                        <span class="course-badge premium">Premium</span>
+                        <h3>LSA-02: Legislação e Normas</h3>
+                        <p>Conformidade regulatória global</p>
+                    </div>
+                    <div class="course-card-body">
+                        <div class="course-meta">
+                            <div class="course-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>8+ horas</span></div>
+                            <div class="course-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span>8 aulas</span></div>
+                        </div>
+                        <div class="course-topics">
+                            <h4>O que você vai aprender:</h4>
+                            <ul>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Lei Arouca e CONCEA</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Normas europeias e americanas</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Funcionamento das CEUAs</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Análise comparativa</li>
+                            </ul>
+                        </div>
+                        <div class="course-card-footer">
+                            <div class="course-price"><span class="current">R$ 49,90</span><span class="period">/mês</span></div>
+                            <a href="#" class="btn btn-secondary">Saiba Mais</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="benefits section" id="beneficios">
+        <div class="container">
+            <div class="section-title">
+                <span>Por que escolher a LSA?</span>
+                <h2>Diferenciais da Nossa Formação</h2>
+                <p>Oferecemos uma experiência de aprendizado única, focada em resultados práticos e aplicação imediata.</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+                    <h3>Conteúdo Baseado em Evidências</h3>
+                    <p>Todo material é fundamentado em literatura científica atualizada e melhores práticas reconhecidas internacionalmente.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+                    <h3>Abrangência Internacional</h3>
+                    <p>Cobertura das normas do Brasil, União Europeia e Estados Unidos para uma visão global da regulamentação.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+                    <h3>Tecnologia Integrada</h3>
+                    <p>Aplicações práticas de IA e ferramentas tecnológicas para otimizar sua pesquisa e garantir qualidade.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+                    <h3>Aplicação Prática</h3>
+                    <p>Fluxos, checklists e mapas práticos para aplicação imediata no seu ambiente de trabalho.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+                    <h3>Comunidade Ativa</h3>
+                    <p>Acesso a uma comunidade de profissionais comprometidos com a excelência científica e o bem-estar animal.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg></div>
+                    <h3>Certificação Reconhecida</h3>
+                    <p>Certificados de conclusão para comprovar sua capacitação e valorizar seu currículo profissional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Audience -->
+    <section class="audience section" id="publico">
+        <div class="container">
+            <div class="section-title">
+                <span>Para quem é?</span>
+                <h2>Público-Alvo</h2>
+                <p>Nossos cursos são desenvolvidos para profissionais comprometidos com a excelência científica.</p>
+            </div>
+            <div class="audience-grid">
+                <div class="audience-card">
+                    <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                    <h4>Pesquisadores</h4>
+                    <p>Cientistas em todas as áreas biomédicas</p>
+                </div>
+                <div class="audience-card">
+                    <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+                    <h4>Pós-graduandos</h4>
+                    <p>Mestrandos e doutorandos</p>
+                </div>
+                <div class="audience-card">
+                    <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+                    <h4>Técnicos de Biotério</h4>
+                    <p>Profissionais de manejo animal</p>
+                </div>
+                <div class="audience-card">
+                    <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z"/></svg></div>
+                    <h4>Médicos-veterinários</h4>
+                    <p>Veterinários de animais de laboratório</p>
+                </div>
+                <div class="audience-card">
+                    <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                    <h4>Membros de CEUA</h4>
+                    <p>Comissões de ética no uso de animais</p>
+                </div>
+                <div class="audience-card">
+                    <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M9 8h1M9 12h1M9 16h1M14 8h1M14 12h1M14 16h1"/><path d="M5 21V5a2 2 0 012-2h10a2 2 0 012 2v16"/></svg></div>
+                    <h4>Instituições</h4>
+                    <p>Ensino, pesquisa e biotérios</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing section" id="planos">
+        <div class="container">
+            <div class="section-title">
+                <span>Investimento</span>
+                <h2>Planos de Assinatura</h2>
+                <p>Escolha o plano que melhor se adapta às suas necessidades de aprendizado.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Mensal</h3>
+                    <div class="pricing-amount"><span class="currency">R$</span><span class="value">49,90</span><span class="period">por mês</span></div>
+                    <ul class="pricing-features">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Acesso a todos os cursos</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Materiais complementares</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Certificados de conclusão</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Acesso à comunidade</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Atualizações de conteúdo</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary">Assinar Mensal</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Anual</h3>
+                    <div class="pricing-amount"><span class="currency">R$</span><span class="value">499</span><span class="period">por ano (economia de R$ 100)</span></div>
+                    <ul class="pricing-features">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Tudo do plano mensal</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>2 meses grátis</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Acesso prioritário a novos cursos</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Webinars exclusivos</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Suporte prioritário</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Assinar Anual</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Vitalício</h3>
+                    <div class="pricing-amount"><span class="currency">R$</span><span class="value">800</span><span class="period">pagamento único</span></div>
+                    <ul class="pricing-features">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Tudo do plano anual</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Acesso vitalício</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Todos os cursos futuros</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Mentoria em grupo</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Badge de Membro Fundador</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary">Assinar Vitalício</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Pronto para Elevar o Padrão da Sua Pesquisa?</h2>
+                <p>Comece gratuitamente com o LSA-00 e descubra como a IA está transformando a ciência de animais de laboratório. Sua jornada para a excelência científica começa aqui.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">Começar Grátis Agora <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    <a href="#cursos" class="btn btn-outline-light">Ver Planos Premium</a>
+                </div>
+                <div class="hotmart-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Pagamento seguro via Hotmart</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq section" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <span>Dúvidas Frequentes</span>
+                <h2>Perguntas Frequentes</h2>
+                <p>Encontre respostas para as perguntas mais comuns sobre a Lab Science Academy.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <button class="faq-question">O curso LSA-00 é realmente gratuito?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+                    <div class="faq-answer"><div class="faq-answer-inner"><p>Sim! O LSA-00: IA em Pesquisa Científica é completamente gratuito e serve como porta de entrada para nossa plataforma. Você terá acesso a todos os 4 módulos, materiais complementares e certificado de conclusão sem nenhum custo.</p></div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Recebo certificado ao concluir os cursos?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+                    <div class="faq-answer"><div class="faq-answer-inner"><p>Sim! Todos os cursos da Lab Science Academy oferecem certificado de conclusão digital, que pode ser utilizado para comprovar sua capacitação e enriquecer seu currículo profissional.</p></div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Os cursos são reconhecidos pelo CONCEA?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+                    <div class="faq-answer"><div class="faq-answer-inner"><p>Os cursos da LSA são desenvolvidos com base nas diretrizes do CONCEA e nas melhores práticas internacionais. Embora sejam cursos de capacitação complementar, o conteúdo está alinhado às exigências regulatórias brasileiras.</p></div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Posso cancelar minha assinatura a qualquer momento?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+                    <div class="faq-answer"><div class="faq-answer-inner"><p>Sim! Você pode cancelar sua assinatura a qualquer momento diretamente pela plataforma Hotmart. Não há multas ou taxas de cancelamento. O acesso permanece ativo até o final do período já pago.</p></div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Quanto tempo tenho para completar os cursos?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+                    <div class="faq-answer"><div class="faq-answer-inner"><p>Todos os cursos são self-paced (no seu próprio ritmo). Enquanto sua assinatura estiver ativa, você terá acesso ilimitado ao conteúdo e poderá revisitar as aulas quantas vezes quiser.</p></div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Como funciona o pagamento pela Hotmart?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+                    <div class="faq-answer"><div class="faq-answer-inner"><p>A Hotmart é uma plataforma segura de pagamentos digitais. Você pode pagar com cartão de crédito (parcelado em até 12x), boleto bancário, Pix ou PayPal. Após a confirmação do pagamento, o acesso é liberado imediatamente.</p></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 50 50" fill="none"><circle cx="25" cy="20" r="8" fill="#FFFFFF"/><rect x="22" y="10" width="6" height="8" fill="#FFFFFF"/><path d="M15 35 L25 45 L35 35" stroke="#FFFFFF" stroke-width="3" fill="none"/><path d="M18 30 Q25 38 32 30" stroke="#87CEEB" stroke-width="2" fill="none"/><ellipse cx="40" cy="42" rx="6" ry="4" fill="#87CEEB"/><circle cx="42" cy="40" r="1" fill="#FFFFFF"/></svg>
+                        <div class="nav-logo-text"><strong>Lab Science</strong><span>Academy</span></div>
+                    </div>
+                    <p>Elevando o padrão da ciência com animais de laboratório por meio de formação aplicada, ética e tecnologicamente orientada.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><path d="M9.75 15.02l5.75-3.27-5.75-3.27v6.54z"/></svg></a>
+                        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+                        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+                        <a href="#" aria-label="Twitter/X"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l11.733 16h4.267l-11.733-16z"/><path d="M4 20l6.4-6.4M13.6 10.4L20 4"/></svg></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Cursos</h4>
+                    <ul>
+                        <li><a href="#">LSA-00: IA em Pesquisa</a></li>
+                        <li><a href="#">LSA-01: Fundamentos e Ética</a></li>
+                        <li><a href="#">LSA-02: Legislação e Normas</a></li>
+                        <li><a href="#">LSA-03: Dor e Bem-estar</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Recursos</h4>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Guia 3Rs Gratuito</a></li>
+                        <li><a href="#">Comunidade</a></li>
+                        <li><a href="#">Webinars</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Suporte</h4>
+                    <ul>
+                        <li><a href="#faq">Perguntas Frequentes</a></li>
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">Área do Aluno</a></li>
+                        <li><a href="#">Hotmart</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Lab Science Academy. Todos os direitos reservados.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">Política de Privacidade</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        navToggle.addEventListener('click', () => { navMenu.classList.toggle('active'); });
+        document.querySelectorAll('.nav-link').forEach(link => { link.addEventListener('click', () => { navMenu.classList.remove('active'); }); });
+
+        // Header Scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 50); });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        const offset = 80;
+                        const pos = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                        window.scrollTo({ top: pos, behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Scroll Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.course-card, .benefit-card, .audience-card, .pricing-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        /*
+        =====================================================
+        INTEGRAÇÃO COM HOTMART - INSTRUÇÕES
+        =====================================================
+        
+        Para integrar com a Hotmart, substitua os links "#" 
+        pelos seus links de checkout:
+        
+        1. Acesse: Hotmart > Produtos > Lab Science Academy
+        2. Copie os links de checkout de cada plano
+        3. Substitua os href="#" pelos links:
+        
+        Exemplos:
+        - Curso Gratuito: https://hotmart.com/pt-br/club/lab-science-academy
+        - Plano Mensal: https://pay.hotmart.com/SEU_CODIGO_MENSAL
+        - Plano Anual: https://pay.hotmart.com/SEU_CODIGO_ANUAL  
+        - Plano Vitalício: https://pay.hotmart.com/SEU_CODIGO_VITALICIO
+        
+        Você também pode usar o Hotmart Sparkle para 
+        incorporar checkouts inline na página.
+        =====================================================
+        */
+    </script>
+</body>
+</html>
