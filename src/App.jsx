@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './index.css';
+import logo from './assets/logo.png';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -71,15 +72,7 @@ function App() {
         <div className="container">
           <nav className="nav">
             <a href="#" className="nav-logo" onClick={(e) => smoothScroll(e, '#hero')}>
-              <svg viewBox="0 0 50 50" fill="none">
-                <circle cx="25" cy="20" r="8" fill="#002B5C" />
-                <rect x="22" y="10" width="6" height="8" fill="#002B5C" />
-                <path d="M15 35 L25 45 L35 35" stroke="#002B5C" strokeWidth="3" fill="none" />
-                <path d="M18 30 Q25 38 32 30" stroke="#87CEEB" strokeWidth="2" fill="none" />
-                <ellipse cx="40" cy="42" rx="6" ry="4" fill="#87CEEB" />
-                <circle cx="42" cy="40" r="1" fill="#002B5C" />
-              </svg>
-              <div className="nav-logo-text"><strong>Lab Science</strong><span>Academy</span></div>
+              <img src={logo} alt="Lab Science Academy" style={{ height: '45px', width: 'auto' }} />
             </a>
             <div className={`nav-menu ${isMenuOpen ? 'active' : ''}`} id="navMenu">
               <a href="#sobre" className="nav-link" onClick={(e) => smoothScroll(e, '#sobre')}>Sobre</a>
@@ -323,7 +316,7 @@ function App() {
           </div>
           <div className="audience-grid">
             <div className="audience-card">
-              <div className="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4" /></svg></div>
+              <div className="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" /></svg></div>
               <h4>Pesquisadores</h4>
               <p>Cientistas em todas as áreas biomédicas</p>
             </div>
@@ -455,15 +448,7 @@ function App() {
           <div className="footer-content">
             <div className="footer-brand">
               <div className="footer-logo">
-                <svg viewBox="0 0 50 50" fill="none">
-                  <circle cx="25" cy="20" r="8" fill="#FFFFFF" />
-                  <rect x="22" y="10" width="6" height="8" fill="#FFFFFF" />
-                  <path d="M15 35 L25 45 L35 35" stroke="#FFFFFF" strokeWidth="3" fill="none" />
-                  <path d="M18 30 Q25 38 32 30" stroke="#87CEEB" strokeWidth="2" fill="none" />
-                  <ellipse cx="40" cy="42" rx="6" ry="4" fill="#87CEEB" />
-                  <circle cx="42" cy="40" r="1" fill="#FFFFFF" />
-                </svg>
-                <div className="nav-logo-text"><strong>Lab Science</strong><span>Academy</span></div>
+                <img src={logo} alt="Lab Science Academy" style={{ height: '40px', width: 'auto', filter: 'brightness(0) invert(1)' }} />
               </div>
               <p>Elevando o padrão da ciência com animais de laboratório por meio de formação aplicada, ética e tecnologicamente orientada.</p>
               <div className="footer-social">
