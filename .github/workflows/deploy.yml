@@ -35,7 +35,7 @@ jobs:
           server-dir: public_html/
           local-dir: ./dist/
           protocol: ftp
-          security: strict
+          security: false
           timeout: 300000
           exclude: |
             **/.git*
